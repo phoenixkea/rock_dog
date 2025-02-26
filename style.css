@@ -1,0 +1,12 @@
+body {
+	background-color: pink;
+	color:antiquewhite
+}
+
+#cat-container {
+	margin-top: 30px;
+}
+
+#cat-container img {
+	width: 200px;
+}
