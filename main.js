@@ -9,7 +9,4 @@ function rotate() {
 	$('body').css({'transform': 'rotate(10deg)'});
 }
 
-function rotate() {
-	console.log('rotating')
-	$('body').css({'transform': 'rotate(60deg)'});
-}
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  
+
+<script type="module" src="model-viewer.min.js"></script>
+<script nomodule src="model-viewer-legacy.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" ></script>
+	<title>the ocean is where i'm meant to be</title>
+</head>
+<style>
+
+
+
+
+
+
+    		.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown img {
+    width: 50px; /* Adjust the size as needed */
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: rgb(255, 241, 241);
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+@keyframes flicker2 {
+  0%, 33% { opacity: 0; }
+  34%, 66% { opacity: 1; } /* Second image visible */
+  67%, 100% { opacity: 0; }
+}
+
+@keyframes flicker3 {
+  0%, 66% { opacity: 0; }
+  67%, 100% { opacity: 1; } /* Third image visible */
+}
+
+
+
+#star_dog_stick_2 {
+  animation: flicker2 12s infinite; /* Second appears after 4s */
+  position: absolute;
+}
+
+#star_dog_stick_3 {
+  animation: flicker3 12s infinite; /* Third appears after 8s */
+  position: absolute;
+}
+
+
+@keyframes flicker1 {
+  0%, 50% { opacity: 1; } /* First image visible for 4s */
+  51%, 100% { opacity: 0; } /* Then it disappears */
+}
+
+@keyframes flicker2 {
+  0%, 50% { opacity: 0; } /* Second image starts invisible */
+  51%, 100% { opacity: 1; } /* It appears after 4s */
+}
+
+#star_dog_stick_2 {
+  animation: flicker1 4s infinite; /* 8s total cycle (4s per image) */
+  position: absolute;
+}
+
+#star_dog_stick_22 {
+  animation: flicker1 4s infinite; /* 8s total cycle (4s per image) */
+  position: absolute;
+}
+
+#star_dog_stick_3 {
+  animation: flicker2 4s infinite; /* Opposite timing to flicker1 */
+  position: absolute;
+}
+
+
+
+
+</style>
+<body style="background-color:rgb(255, 255, 255); overflow:hidden;">
+
+  <!----
+<img src="image/stars/star_stick_dog.png" style=" position: absolute; top: 0px; left:0px; height: 1000px; width: 1000px; ">
+
+<img id="star_dog_stick_2" src="image/rockdog/dog1.png" style="position: absolute; top: -100px; left:500px; height: 1000px; width: 1200px;">
+--->
+
+<!---
+<img id="star_dog_stick_2" src="image/animation_dogrock/2.png" style="position: absolute; width: 1200px; height: 718px; left: 0px; top: -5px;"  >
+
+<img id="star_dog_stick_3" src="image/animation_dogrock/3.png" style="position: absolute; width: 1200px; height: 718px; left: 0px; top: -5px;"  >
+-->
+
+
+<video autoplay muted loop style="position: absolute; left: 0px; top: -40px; width: 1324px; height: 786px;">
+  <source src="videos/dog3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p id="mums_poem2">
+  <p style="position: absolute; left: 480px; top: 12px; font-size: 45px;"> <marquee behavior="alternate" style="width: 800px;"> <i>i'll take you on a stroll</i> </marquee></p>
+
+  <p style="position: absolute; left: 800px; top: 80px; font-size: 24px;">somewhere far and unknown</p>
+  <p style="position: absolute; left: 750px; top: 103px; font-size: 24px; color: rgb(254, 217, 217);"> <i>with you, everywhere! feels like <u>home</u></i></p>
+
+  <p style="position: absolute; left: 700px; top: 130px; font-size: 20px;"> we can walk the mystical land</p>
+  <p style="position: absolute; left: 650px; top: 150px; font-size: 20px;">dip our feet in the sea </p>
+
+  <p style="position: absolute; left: 420px; top: 230px; font-size: 24px;"> <i>i'm sure we'll end up at the ocean,</i></p>
+  <p style="position: absolute; left: 350px; top: 258px; font-size: 20px;">thats where we're supposed to be &lt;3 </p>
+
+
+  <p style="position: absolute; left: 350px; top: 280px; font-size: 20px;">so hold hands with me </p>
+
+  <p style="position: absolute; left: 690px; top: 450px; font-size: 20px;">lets take on the day  </p>
+
+  <p style="position: absolute; left: 670px; top: 470px; font-size: 20px;">i know we'll get through this</p>
+  <p style="position: absolute; left: 20px; top: 610px; font-size: 20px;">i know it'll be okay</p>
+</p>
+
+
+<div class="dropdown">
+  <img src="image/dropdown/menu.png" alt="Menu">
+  <div class="dropdown-content">
+      <a href="index.html"><i>homepage</i></a>
+    <a href="page2.html"><i>as i walk to my mums house☆彡</i></a>
+    <a href="page5.html"><i>the ocean is where i'm meant to be</i></a>
+    <a href="page3.html"><i>little puppy, dance with me</i></a>
+    <a href="page6.html"><i>puddles lets find wuddles</i></a>
+    <a href="gallery.html">gallery</a>
+    <a href="https://open.spotify.com/playlist/1DH13QjjNADStC9eDeh3Pb?si=d0152e58670c45c5">soundtrack☆彡</a>
+
+  </div>
+</div>
+
+  <a href="page3.html"><img src="image/arrow/arrow2.png"  
+    style=" position: absolute; width:62px;height:62px; top: 600px; left: 1220px;"></a>
+
+
+
+</body>
+
+
+<script type="text/javascript" src="main.js"></script>
+</html>

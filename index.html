@@ -1,21 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="jquery.min.js"></script>
-	<title>rock_dog...BUNNI!
-	</title>
+
+<script type="module" src="model-viewer.min.js"></script>
+<script nomodule src="model-viewer-legacy.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+	
+<link rel="stylesheet" type="text/css" href="style.css">
+	<title>takeMeOnAStroll</title>
 </head>
-<body>
-	<h1>this is a fan account about my new rock</h1>
-	<p>click the button to make something happen!</p>
-	<button onclick="changeBackground()">make it happen</button>
-	<button onclick="rotate()">rotate</button>
-	<div id="cat-container">
-		<img src="image/cat.jpg" />
-	</div>
+
+<style>
+    		.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown img {
+    width: 50px; /* Adjust the size as needed */
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: rgb(255, 241, 241);
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+</style>
+
+<body style="background-color:rgb(255, 255, 255);overflow:hidden;">
+
+
+        <model-viewer src="scans/just_dog_1.glb" auto-rotate="" alt="rectangle" background-color="#455A64" 
+            style="position: absolute; width: 1200px; height: 1200px; top: -280px; align-items: center;" ar-status="not-presenting"></model-viewer>
+            
+            
+
+            <p style="position: absolute; top: 30px; right: -100px; width:1400px; font-size: 130px;  font-weight: 100; font-family: mon; color: rgb(0, 0, 0); "> 
+                <marquee behaviour= "bounce" scrollamount="3">
+                  TAKE ME ON A 
+                </marquee> </p>
+      
+
+            <p style="position: absolute; top: 210px; width:1400px; font-size: 130px; font-family: mon; color: rgb(0, 0, 0); "> 
+                <marquee direction="right" scrollamount="3" style="position: absolute; left: -80px;">
+                   STROLL
+                </marquee> </p>
+
+
+                <div class="dropdown">
+                  <img src="image/dropdown/menu.png" alt="Menu">
+                  <div class="dropdown-content">
+                      <a href="index.html"><i>homepage</i></a>
+                    <a href="page2.html"><i>as i walk to my mums house☆彡</i></a>
+                    <a href="page5.html"><i>the ocean is where i'm meant to be</i></a>
+                    <a href="page3.html"><i>little puppy, dance with me</i></a>
+                    <a href="page6.html"><i>puddles lets find wuddles</i></a>
+                    <a href="gallery.html">gallery</a>
+                    <a href="https://open.spotify.com/playlist/1DH13QjjNADStC9eDeh3Pb?si=d0152e58670c45c5">soundtrack☆彡</a>
+          
+                  </div>
+                </div>
+
+
+                  <a href="page2.html"><img src="image/arrow/arrow2.png"  
+                    style=" position: absolute; width:62px;height:62px; top: 600px; left: 1220px;"></a>
+
+
+
 </body>
-	<script type="text/javascript" src="main.js"></script>
+
+
+<script type="text/javascript" src="main.js"></script>
 </html>

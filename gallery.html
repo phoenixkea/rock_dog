@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>gallery</title>
+
+  <style>
+    /* ---------- base & variables ---------- */
+    *,*::before,*::after{ box-sizing:border-box; }
+    html { scrollbar-gutter: stable both-edges; }
+    :root{
+      /* rails */
+      --rail-w: 64px;
+      --rail-speed: 40s;          /* lower = faster */
+      --rail-color: #000;
+      --rail-opacity: .65;
+
+      /* gallery */
+      --card-w: 360px;
+      --gap-size: 28px;
+      --border-x: 0px;            /* left/right border */
+      --border-y: 5px;            /* top/bottom border */
+      --border-radius: 10px;
+      --border-color: #fff;
+
+      /* track column count for exact centering */
+      --cols: 3;
+    }
+    @media (max-width: 1100px){ :root{ --cols: 2; } }
+    @media (max-width: 720px){  :root{ --cols: 1; } }
+
+    body{
+      margin:0;
+      padding-inline: var(--rail-w);   /* keep content clear of fixed rails */
+      background:#fff;
+    }
+
+    /* ---------- fixed background image (random doodle) ---------- */
+    #bg-art{
+      position: fixed; inset: 0;
+      z-index: 0;                          /* bottom-most */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;            /* use 'cover' for full-bleed */
+      pointer-events: none;
+      opacity: 100;
+    }
+
+ 
+    /* ---------- rails (fixed, seamless loop) ---------- */
+    .rail{
+      position: fixed; top: 0; bottom: 0; 
+      width: var(--rail-w);
+      z-index: 5;                           /* above stars/background; grid is still centered away from them */
+      pointer-events: none;
+    }
+    .rail.left  { left: 0; }
+    .rail.right { right: 0; }
+    .rail .mask{
+      position:absolute; inset:0; overflow:hidden;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+    }
+    .rail .loop{
+      position: relative;
+      display:flex; flex-direction:column; align-items:center;
+      gap:0px;
+      will-change: transform;
+      animation: rail-up var(--rail-speed) linear infinite;
+    }
+    .rail.right .loop{ 
+      animation-direction: reverse; 
+    }
+
+    @keyframes rail-up{ to { transform: translate3d(0,-50%,0); } }
+
+    .rail .chunk{ display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      gap:16px; 
+    }
+
+    .rail p{
+      margin:0;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font: 700 28px/1 "Times New Roman", serif;
+      letter-spacing: .5px;
+      color: var(--rail-color);
+      opacity: var(--rail-opacity);
+    }
+
+    /* ---------- header pills ---------- */
+    .home-nav{
+      position: fixed;
+      color: rgb(254, 217, 217) ;
+
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill-btn{
+      appearance: none;
+      border: 1px solid #0001;
+      background: #fff;
+      color: #000;
+      border-radius: 9999px;
+      padding: 8px 14px;
+      letter-spacing: .2px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 5px rgb(254, 217, 217);;
+      text-decoration: none;   /* for <a> */
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 100px;
+    }
+    .pill-btn:hover{ filter: brightness(1.05); }
+    .pill-btn:active{ transform: translateY(1px); }
+    .pill-small{ padding: 6px 10px; font-size: 12px; min-width:auto;}
+
+    /* ---------- page width & centered grid ---------- */
+    .page{
+      /* exact width of the grid: cols*card + (cols-1)*gap */
+      width: calc(var(--cols) * var(--card-w) + (var(--cols) - 1) * var(--gap-size));
+      max-width: 100%;
+      margin: 100px -30px;       /* centered block with top margin */
+      padding: 0;
+      position: relative;
+      z-index: 2;                  /* above bg & stars */
+    }
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(var(--cols), var(--card-w));
+      gap: 26px;
+      justify-content: center;
+      
+    }
+    .card{
+      width: var(--card-w);
+      border-style: solid;
+      border-color: var(--border-color);
+      border-width: var(--border-y) var(--border-x);  /* Y X */
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+      padding: 5px;
+    }
+    .thumb{ display:block; width:100%; height:auto; background:#fff; }
+    figcaption{ font-size:14px; color:#000; margin:8px 4px 2px; text-align:right; }
+  </style>
+</head>
+
+<body>
+  <!-- fixed background image layer -->
+  <div id="bg-art" aria-hidden="true"></div>
+
+  <!-- centered pills -->
+  <div class="home-nav">
+    <a class="pill-btn" href="index.html" role="button">home</a>
+    <button class="pill-btn pill-small" id="bgBtn" type="button">submissions</button>
+  </div>
+
+  <!-- LEFT rail -->
+  <aside class="rail left" aria-hidden="true">
+    <div class="mask">
+      <div class="loop">
+        <div class="chunk">
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡</p>
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡</p>
+        </div>
+        
+        <div class="chunk" aria-hidden="true">
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡</p>
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT rail -->
+  <aside class="rail right" aria-hidden="true">
+    <div class="mask">
+      <div class="loop">
+        <div class="chunk">
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡 •</p>
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡 •</p>
+        </div>
+        <div class="chunk" aria-hidden="true">
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡 •</p>
+          <p>take me on a stroll☆彡 take me on a stroll☆彡 take me on a stroll☆彡 •</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- centered page wrapper -->
+  <main class="page">
+    <section id="grid" class="grid" hidden></section>
+  </main>
+
+  <script type="module">
+    /* ONE Supabase import & client — no duplicates */
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://oksxrkytqclwrzmzvvls.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rc3hya3l0cWNsd3J6bXp2dmxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczNzQ2MzEsImV4cCI6MjA3Mjk1MDYzMX0.0XUz1ZZPKYaV5Y3I88i4R7QDDd4efmnMsLfgnYLXYmc';
+    const BUCKET = 'gallery';
+    const IMG_PREFIX = 'doodles';
+    const META_PREFIX = 'doodles/meta';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const grid = document.getElementById('grid');
+    const bgLayer = document.getElementById('bg-art');
+    const bgBtn = document.getElementById('bgBtn');
+
+    /* -------- gallery rendering -------- */
+    async function listImages() {
+      const { data, error } = await supabase.storage.from(BUCKET).list(IMG_PREFIX, { limit: 1000 });
+      if (error) throw error;
+      return (data || [])
+        .filter(f => /\.(png|jpg|jpeg|webp)$/i.test(f.name))
+        .sort((a,b) => b.name.localeCompare(a.name, undefined, { numeric:true, sensitivity:'base' }));
+    }
+
+    const publicUrl = path => supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+
+    async function getCaption(baseName) {
+      // sidecar JSON -> keep exact case as saved
+      const metaPath = `${META_PREFIX}/${baseName}.json`;
+      const { data } = await supabase.storage.from(BUCKET).download(metaPath);
+      if (data) {
+        try {
+          const meta = JSON.parse(await data.text());
+          if (meta?.name && meta.name.trim()) return meta.name;
+        } catch {}
+      }
+      // fallback: filename slug AS-IS (no auto-capitalize)
+      const slug = baseName.split('_').slice(1).join(' ');
+      return slug.replace(/_/g, ' ');
+    }
+
+    function makeCard({ href, src, caption }) {
+      const fig = document.createElement('figure');
+      fig.className = 'card';
+
+      const link = document.createElement('a');
+      link.href = href; link.target = '_blank'; link.rel = 'noopener';
+
+      const img = new Image();
+      img.className = 'thumb';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = src;
+      img.alt = caption || 'archive image';
+
+      const cap = document.createElement('figcaption');
+      cap.textContent = caption || 'anon';
+
+      link.appendChild(img);
+      fig.append(link, cap);
+      return fig;
+    }
+
+    async function render() {
+      try {
+        const files = await listImages();
+        grid.innerHTML = '';
+        for (const f of files) {
+          const base = f.name.replace(/\.(png|jpg|jpeg|webp)$/i, '');
+          const path = `${IMG_PREFIX}/${f.name}`;
+          const [url, caption] = await Promise.all([publicUrl(path), getCaption(base)]);
+          grid.appendChild(makeCard({ href: url, src: url, caption }));
+        }
+        grid.hidden = false;
+      } catch (err) {
+        console.error('Could not load gallery:', err);
+        grid.hidden = false;
+        grid.textContent = 'Could not load gallery (see console).';
+      }
+    }
+
+    /* -------- random background from doodles -------- */
+    async function randomDoodleUrl(){
+      const { data, error } = await supabase.storage.from(BUCKET).list(IMG_PREFIX, { limit: 1000 });
+      if (error) throw error;
+
+      const files = (data || []).filter(f => /\.(png|jpg|jpeg|webp)$/i.test(f.name));
+      if (!files.length) throw new Error('No images found in doodles/');
+      const pick = files[Math.floor(Math.random() * files.length)];
+      const path = `${IMG_PREFIX}/${pick.name}`;
+      return publicUrl(path);
+    }
+
+    async function setBackgroundFromDoodles(){
+      try{
+        bgLayer.style.opacity = '0';
+        const url = await randomDoodleUrl();
+        bgLayer.style.backgroundImage = `url("${url}")`;
+        requestAnimationFrame(() => { bgLayer.style.opacity = '100'; });
+      }catch(err){
+        console.error('BG set failed:', err);
+        alert('Could not set background image (see console).');
+      }
+    }
+
+    bgBtn?.addEventListener('click', setBackgroundFromDoodles);
+
+    /* init */
+    window.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>
